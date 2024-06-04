@@ -54,6 +54,19 @@ git clone https://github.com/RhinoSecurityLabs/cloudgoat.git
 cd cloudgoat
 pip3 install -r ./requirements.txt
 chmod +x cloudgoat.py
+
+# Install dependencies
+RUN apt-get update && apt-get install -y wget unzip
+
+# Install Terraform
+RUN wget https://releases.hashicorp.com/terraform/1.0.11/terraform_1.0.11_linux_amd64.zip && \
+    unzip terraform_1.0.11_linux_amd64.zip && \
+    mv terraform /usr/local/bin/ && \
+    rm terraform_1.0.11_linux_amd64.zip
+
+# Verify Terraform installation
+RUN terraform --version
+
 ```
 You may also want to run some quick configuration commands - it'll save you some time later:
 ```
